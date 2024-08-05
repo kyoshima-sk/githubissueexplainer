@@ -19,7 +19,7 @@ async function sendToLLMAPI(comments) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ai71-api-1767965a-61fd-47a9-8965-6606fac97950'
+        'Authorization': 'Bearer <YOUR-API-KEY>'
       },
       body: JSON.stringify({
         model: 'tiiuae/falcon-180B-chat',
