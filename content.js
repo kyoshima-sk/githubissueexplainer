@@ -31,13 +31,13 @@ async function sendToLLMAPI(comments) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer <YOUR-API-KEY>'
+        'Authorization': 'Bearer ai71-api-1767965a-61fd-47a9-8965-6606fac97950'
       },
       body: JSON.stringify({
         model: 'tiiuae/falcon-180B-chat',
         messages: [
           { role: 'system', content: 'You are a helpful assistant.' },
-          { role: 'user', content: `Here are the comments from the GitHub issue: ${combinedComments}` }
+          { role: 'user', content: `Here are the comments from the GitHub issue please explain it simply and in detail: ${combinedComments}` }
         ]
       })
     }, response => {
