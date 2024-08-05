@@ -12,6 +12,18 @@ async function scrapeIssueComments() {
 
 async function sendToLLMAPI(comments) {
   console.log('Sending comments to LLM API');
+
+  // Truncate each comment to a maximum length
+  const maxCommentLength = 500;
+  const truncatedComments = comments.map(comment => comment.slice(0, maxCommentLength));
+
+  // Truncate the total length of the combined comments
+  const maxTotalLength = 4000;
+  let combinedComments = truncatedComments.join('\n');
+  if (combinedComments.length > maxTotalLength) {
+    combinedComments = combinedComments.slice(0, maxTotalLength);
+  }
+
   const response = await new Promise((resolve, reject) => {
     chrome.runtime.sendMessage({
       type: 'proxyRequest',
@@ -25,7 +37,7 @@ async function sendToLLMAPI(comments) {
         model: 'tiiuae/falcon-180B-chat',
         messages: [
           { role: 'system', content: 'You are a helpful assistant.' },
-          { role: 'user', content: `Here are the comments from the GitHub issue: ${comments.join('\n')}` }
+          { role: 'user', content: `Here are the comments from the GitHub issue: ${combinedComments}` }
         ]
       })
     }, response => {
