@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Issue Explainer",
+  "version": "1.0",
+  "description": "Explains GitHub issues using sentence embeddings and an LLM API.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://github.com/*",
+    "https://api.ai71.ai/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
